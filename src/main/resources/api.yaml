@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: ms_superheroes_v1
+  description: Superheroes service by Nahuel Ariel Ojea
+  version: 1.0.0
+
+paths:
+  /superheroes/{id}:
+    get:
+      operationId: getSuperhero
+      summary: Get superhero
+      description: This service returns a superhero by identifier
+      parameters:
+        - in: path
+          name: id
+          description: Superhero identifier
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/superhero_response'
+        400:
+          description: Bad request
+        404:
+          description: Superhero not found
+        500:
+          description: Internal error
+    put:
+      operationId: updateSuperhero
+      summary: Update superhero
+      description: Update an existing superhero
+      parameters:
+        - in: path
+          name: id
+          description: Superhero identifier
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/superhero'
+      responses:
+        200:
+          $ref: '#/components/responses/superhero_response'
+        400:
+          description: Bad request
+        404:
+          description: Superhero not found
+        500:
+          description: Internal error
+    delete:
+      operationId: deleteSuperhero
+      summary: Delete superhero
+      description: Delete a superhero by ID
+      parameters:
+        - in: path
+          name: id
+          description: Superhero identifier
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Superhero deleted successfully
+        404:
+          description: Superhero not found
+        500:
+          description: Internal error
+
+  /superheroes:
+    get:
+      operationId: getSuperheroes
+      summary: Get superheroes
+      description: This service returns all superheroes. In the case that the parameter 'name' is sent it searches for that parameter
+      parameters:
+        - in: query
+          name: name
+          description: Name of the superhero
+          schema:
+            type: string
+            example: "Spiderman"
+            minLength: 1
+            maxLength: 50
+      responses:
+        200:
+          $ref: '#/components/responses/superheroes_response'
+        400:
+          description: Bad request
+        500:
+          description: Internal error
+    post:
+      operationId: createSuperhero
+      summary: Create superhero
+      description: Create a new superhero
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/superhero'
+      responses:
+        201:
+          $ref: '#/components/responses/superhero_response'
+        400:
+          description: Bad request
+        500:
+          description: Internal error
+
+components:
+  responses:
+    superhero_response:
+      description: In case the superhero has been returned correctly.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/superhero'
+    superheroes_response:
+      description: In case the superheroes has been returned correctly.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              superheroes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/superhero'
+
+  schemas:
+    superhero:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Superhero identifier
+        name:
+          type: string
+          description: Superhero name
