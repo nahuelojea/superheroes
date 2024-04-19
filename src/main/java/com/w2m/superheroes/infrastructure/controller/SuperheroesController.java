@@ -21,7 +21,7 @@ public class SuperheroesController implements SuperheroesApi {
 
     @Override
     public ResponseEntity<SuperheroDTO> getSuperhero(Integer id) {
-        return null;
+        return ResponseEntity.ok(new SuperheroDTO().id(1).name("Superman"));
     }
 
     @Override
