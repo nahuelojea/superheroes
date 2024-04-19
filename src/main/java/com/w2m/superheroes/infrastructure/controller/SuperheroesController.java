@@ -1,4 +1,4 @@
-package com.w2m.superheroes.infrastructure;
+package com.w2m.superheroes.infrastructure.controller;
 
 import com.w2m.superheroes.openapi.api.SuperheroesApi;
 import com.w2m.superheroes.openapi.dto.GetSuperheroes200ResponseDTO;

@@ -20,14 +20,14 @@
 		<springdoc-openapi-ui-version>1.8.0</springdoc-openapi-ui-version>
 		<openapi-generator-version>7.4.0</openapi-generator-version>
 		<jackson-databind-version>0.2.6</jackson-databind-version>
-		<swagger-annotations-version>2.2.21</swagger-annotations-version>
 		<sonar-maven-plugin-version>3.11.0.3922</sonar-maven-plugin-version>
 		<jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+		<springdoc-openapi-starter-webmvc-ui-version>2.5.0</springdoc-openapi-starter-webmvc-ui-version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -60,23 +60,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc-openapi-ui-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${springfox-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${springfox-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-annotations</artifactId>
-			<version>${swagger-annotations-version}</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter-webmvc-ui-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openapitools</groupId>

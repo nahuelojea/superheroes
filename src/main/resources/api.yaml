@@ -135,7 +135,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Superhero identifier
         name:
           type: string
