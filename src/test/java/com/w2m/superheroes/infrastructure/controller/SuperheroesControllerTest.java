@@ -45,7 +45,7 @@ public class SuperheroesControllerTest {
                     "superheroes": [
                         {"id": 1, "name": "Superman"},
                         {"id": 2, "name": "Spiderman"},
-                        {"id": 3, "name": "Batman"},
+                        {"id": 3, "name": "Goku SSJ2"},
                         {"id": 4, "name": "Manolito el fuerte"},
                         {"id": 5, "name": "Super Hijitus"},
                         {"id": 6, "name": "Capitán América"},
@@ -60,7 +60,7 @@ public class SuperheroesControllerTest {
     }
 
     @Test
-    void shouldReturnSupermanBatmanSpidermanAndManolitoWhenNameIsMan() throws Exception {
+    void shouldReturnSupermanSpidermanAndManolitoWhenNameIsMan() throws Exception {
         val name = "man";
 
         mockMvc.perform(get(GET_ALL_SUPERHEROES_BY_NAME_URL, name))
@@ -70,7 +70,6 @@ public class SuperheroesControllerTest {
                     "superheroes": [
                         {"id": 1, "name": "Superman"},
                         {"id": 2, "name": "Spiderman"},
-                        {"id": 3, "name": "Batman"},
                         {"id": 4, "name": "Manolito el fuerte"}
                     ]
                 }

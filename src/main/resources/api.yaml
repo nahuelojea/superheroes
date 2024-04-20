@@ -10,8 +10,6 @@ paths:
       operationId: getSuperhero
       summary: Get superhero
       description: This service returns a superhero by identifier
-      tags:
-        - Get
       parameters:
         - in: path
           name: id
@@ -32,8 +30,6 @@ paths:
       operationId: updateSuperhero
       summary: Update superhero
       description: Update an existing superhero
-      tags:
-        - Update
       parameters:
         - in: path
           name: id
@@ -60,8 +56,6 @@ paths:
       operationId: deleteSuperhero
       summary: Delete superhero
       description: Delete a superhero by ID
-      tags:
-        - Delete
       parameters:
         - in: path
           name: id
@@ -82,8 +76,6 @@ paths:
       operationId: getSuperheroes
       summary: Get superheroes
       description: This service returns all superheroes
-      tags:
-        - Get
       responses:
         200:
           $ref: '#/components/responses/superheroes_response'
@@ -95,8 +87,6 @@ paths:
       operationId: createSuperhero
       summary: Create superhero
       description: Create a new superhero
-      tags:
-        - Create
       requestBody:
         required: true
         content:
@@ -117,8 +107,6 @@ paths:
       operationId: getSuperheroesByName
       summary: Get superheroes by name
       description: This service returns all superheroes that your name contains the search
-      tags:
-        - Get
       parameters:
         - in: query
           name: name
