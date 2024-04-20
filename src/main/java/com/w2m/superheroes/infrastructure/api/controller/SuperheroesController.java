@@ -1,6 +1,7 @@
 package com.w2m.superheroes.infrastructure.api.controller;
 
 import com.w2m.superheroes.application.SuperheroesService;
+import com.w2m.superheroes.application.config.LogResponseTime;
 import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.domain.exception.SuperheroAlreadyExistsException;
 import com.w2m.superheroes.domain.exception.SuperheroNotFoundException;
@@ -22,6 +23,7 @@ public class SuperheroesController implements SuperheroesApi {
     private final SuperheroesService superheroesService;
     private final SuperheroesMapper superheroesMapper;
 
+    @LogResponseTime
     @Override
     public ResponseEntity<SuperheroDTO> getSuperhero(Integer id) {
         try {
@@ -33,6 +35,7 @@ public class SuperheroesController implements SuperheroesApi {
         }
     }
 
+    @LogResponseTime
     @Override
     public ResponseEntity<GetSuperheroes200ResponseDTO> getSuperheroes() {
         List<Superhero> superheroesServiceAll = superheroesService.findAll();
@@ -40,6 +43,7 @@ public class SuperheroesController implements SuperheroesApi {
         return ResponseEntity.ok(new GetSuperheroes200ResponseDTO().superheroes(superheroesDTO));
     }
 
+    @LogResponseTime
     @Override
     public ResponseEntity<GetSuperheroes200ResponseDTO> getSuperheroesByName(String name) {
         List<Superhero> superheroesServiceByName = superheroesService.findByName(name);
@@ -47,6 +51,7 @@ public class SuperheroesController implements SuperheroesApi {
         return ResponseEntity.ok(new GetSuperheroes200ResponseDTO().superheroes(superheroesDTO));
     }
 
+    @LogResponseTime
     @Override
     public ResponseEntity<SuperheroDTO> createSuperhero(SuperheroDTO superheroDTO) {
         try {
@@ -59,6 +64,7 @@ public class SuperheroesController implements SuperheroesApi {
         }
     }
 
+    @LogResponseTime
     @Override
     public ResponseEntity<SuperheroDTO> updateSuperhero(Integer id, SuperheroDTO superheroDTO) {
         try {
@@ -72,6 +78,7 @@ public class SuperheroesController implements SuperheroesApi {
         }
     }
 
+    @LogResponseTime
     @Override
     public ResponseEntity<Void> deleteSuperhero(Integer id) {
         superheroesService.deleteById(id);
