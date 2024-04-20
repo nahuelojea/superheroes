@@ -10,6 +10,8 @@ paths:
       operationId: getSuperhero
       summary: Get superhero
       description: This service returns a superhero by identifier
+      tags:
+        - Get
       parameters:
         - in: path
           name: id
@@ -30,6 +32,8 @@ paths:
       operationId: updateSuperhero
       summary: Update superhero
       description: Update an existing superhero
+      tags:
+        - Update
       parameters:
         - in: path
           name: id
@@ -56,6 +60,8 @@ paths:
       operationId: deleteSuperhero
       summary: Delete superhero
       description: Delete a superhero by ID
+      tags:
+        - Delete
       parameters:
         - in: path
           name: id
@@ -75,7 +81,44 @@ paths:
     get:
       operationId: getSuperheroes
       summary: Get superheroes
-      description: This service returns all superheroes. In the case that the parameter 'name' is sent it searches for that parameter
+      description: This service returns all superheroes
+      tags:
+        - Get
+      responses:
+        200:
+          $ref: '#/components/responses/superheroes_response'
+        400:
+          description: Bad request
+        500:
+          description: Internal error
+    post:
+      operationId: createSuperhero
+      summary: Create superhero
+      description: Create a new superhero
+      tags:
+        - Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/superhero'
+      responses:
+        201:
+          $ref: '#/components/responses/superhero_response'
+        400:
+          description: Bad request
+        409:
+          description: Superhero already exists
+        500:
+          description: Internal error
+  /superheroes/search:
+    get:
+      operationId: getSuperheroesByName
+      summary: Get superheroes by name
+      description: This service returns all superheroes that your name contains the search
+      tags:
+        - Get
       parameters:
         - in: query
           name: name
@@ -88,23 +131,6 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/superheroes_response'
-        400:
-          description: Bad request
-        500:
-          description: Internal error
-    post:
-      operationId: createSuperhero
-      summary: Create superhero
-      description: Create a new superhero
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/superhero'
-      responses:
-        201:
-          $ref: '#/components/responses/superhero_response'
         400:
           description: Bad request
         500:
