@@ -3,6 +3,7 @@ package com.w2m.superheroes.infrastructure.adapter;
 import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.domain.repository.SuperheroesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ public class H2DbSuperheroesRepository implements SuperheroesRepository {
     }
 
     @Override
+    @Cacheable("superheroes")
     public List<Superhero> findAll() {
         return superheroesJpaRepository.findAll();
     }
