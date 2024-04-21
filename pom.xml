@@ -20,7 +20,6 @@
 		<springdoc-openapi-ui-version>1.8.0</springdoc-openapi-ui-version>
 		<openapi-generator-version>7.4.0</openapi-generator-version>
 		<jackson-databind-version>0.2.6</jackson-databind-version>
-		<sonar-maven-plugin-version>3.11.0.3922</sonar-maven-plugin-version>
 		<jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
 		<springdoc-openapi-starter-webmvc-ui-version>2.5.0</springdoc-openapi-starter-webmvc-ui-version>
 	</properties>
