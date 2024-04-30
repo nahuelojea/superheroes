@@ -1,4 +1,4 @@
-package com.w2m.superheroes.infrastructure.mapper;
+package com.w2m.superheroes.application.mapper;
 
 import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.openapi.dto.SuperheroDTO;
@@ -12,7 +12,6 @@ public interface SuperheroesMapper {
 
     List<SuperheroDTO> toSuperheroesDTO(List<Superhero> superheroes);
 
-    @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     Superhero toSuperhero(SuperheroDTO superheroDTO);
 

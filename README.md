@@ -57,11 +57,6 @@ The OpenAPI maven plugin was used for the code generation
 
 ## Run Spring Boot application with Docker
 
-Compile application:
-```
- mvn clean install
-```
-
 Create Docker image:
 ```
  docker build --tag=superheroes:latest .
@@ -71,6 +66,22 @@ Run Docker container:
 
 ```
  docker run -p8081:8081 superheroes:latest
+```
+
+## JaCoCo Code Coverage
+
+JaCoCo was used to generate the code coverage report.
+
+To generate the report, run the following command:
+
+```
+mvn clean verify
+```
+
+The report will be generated in the following path:
+
+```
+target/site/jacoco/index.html
 ```
 
 ## REST Request examples
@@ -126,7 +137,6 @@ Curl:
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "id": 20,
   "name": "Goku"
 }'
 ```
@@ -140,7 +150,6 @@ Curl:
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "id": 20,
   "name": "Goku SSJ2"
 }'
 ```

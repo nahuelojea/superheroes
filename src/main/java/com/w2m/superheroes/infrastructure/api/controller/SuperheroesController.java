@@ -2,10 +2,8 @@ package com.w2m.superheroes.infrastructure.api.controller;
 
 import com.w2m.superheroes.application.SuperheroesService;
 import com.w2m.superheroes.application.config.LogResponseTime;
-import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.domain.exception.SuperheroAlreadyExistsException;
 import com.w2m.superheroes.domain.exception.SuperheroNotFoundException;
-import com.w2m.superheroes.infrastructure.mapper.SuperheroesMapper;
 import com.w2m.superheroes.openapi.api.SuperheroesApi;
 import com.w2m.superheroes.openapi.dto.GetSuperheroes200ResponseDTO;
 import com.w2m.superheroes.openapi.dto.SuperheroDTO;
@@ -21,14 +19,12 @@ import java.util.List;
 public class SuperheroesController implements SuperheroesApi {
 
     private final SuperheroesService superheroesService;
-    private final SuperheroesMapper superheroesMapper;
 
     @LogResponseTime
     @Override
     public ResponseEntity<SuperheroDTO> getSuperhero(Integer id) {
         try {
-            Superhero superhero = superheroesService.findById(id);
-            SuperheroDTO superheroDTO = superheroesMapper.toSuperheroDTO(superhero);
+            SuperheroDTO superheroDTO = superheroesService.findById(id);
             return ResponseEntity.ok(superheroDTO);
         } catch (SuperheroNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -38,16 +34,14 @@ public class SuperheroesController implements SuperheroesApi {
     @LogResponseTime
     @Override
     public ResponseEntity<GetSuperheroes200ResponseDTO> getSuperheroes() {
-        List<Superhero> superheroesServiceAll = superheroesService.findAll();
-        List<SuperheroDTO> superheroesDTO = superheroesMapper.toSuperheroesDTO(superheroesServiceAll);
+        List<SuperheroDTO> superheroesDTO = superheroesService.findAll();
         return ResponseEntity.ok(new GetSuperheroes200ResponseDTO().superheroes(superheroesDTO));
     }
 
     @LogResponseTime
     @Override
     public ResponseEntity<GetSuperheroes200ResponseDTO> getSuperheroesByName(String name) {
-        List<Superhero> superheroesServiceByName = superheroesService.findByName(name);
-        List<SuperheroDTO> superheroesDTO = superheroesMapper.toSuperheroesDTO(superheroesServiceByName);
+        List<SuperheroDTO> superheroesDTO = superheroesService.findByName(name);
         return ResponseEntity.ok(new GetSuperheroes200ResponseDTO().superheroes(superheroesDTO));
     }
 
@@ -55,9 +49,7 @@ public class SuperheroesController implements SuperheroesApi {
     @Override
     public ResponseEntity<SuperheroDTO> createSuperhero(SuperheroDTO superheroDTO) {
         try {
-            Superhero superhero = superheroesMapper.toSuperhero(superheroDTO);
-            Superhero savedSuperhero = superheroesService.save(superhero);
-            SuperheroDTO savedSuperheroDTO = superheroesMapper.toSuperheroDTO(savedSuperhero);
+            SuperheroDTO savedSuperheroDTO = superheroesService.save(superheroDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedSuperheroDTO);
         } catch (SuperheroAlreadyExistsException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -68,10 +60,8 @@ public class SuperheroesController implements SuperheroesApi {
     @Override
     public ResponseEntity<SuperheroDTO> updateSuperhero(Integer id, SuperheroDTO superheroDTO) {
         try {
-            Superhero superhero = superheroesMapper.toSuperhero(superheroDTO);
-            superhero.setId(id);
-            Superhero updatedSuperhero = superheroesService.update(superhero);
-            SuperheroDTO updatedSuperheroDTO = superheroesMapper.toSuperheroDTO(updatedSuperhero);
+            superheroDTO.setId(id);
+            SuperheroDTO updatedSuperheroDTO = superheroesService.update(superheroDTO);
             return ResponseEntity.ok(updatedSuperheroDTO);
         } catch (SuperheroNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -80,8 +70,8 @@ public class SuperheroesController implements SuperheroesApi {
 
     @LogResponseTime
     @Override
-    public ResponseEntity<Void> deleteSuperhero(Integer id) {
+    public ResponseEntity<String> deleteSuperhero(Integer id) {
         superheroesService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok("Superhero deleted successfully");
     }
 }

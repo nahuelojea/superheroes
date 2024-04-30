@@ -3,6 +3,7 @@ package com.w2m.superheroes.infrastructure.adapter;
 import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.domain.repository.SuperheroesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ import java.util.Optional;
 @Primary
 public class H2DbSuperheroesRepository implements SuperheroesRepository {
 
+    private static final String SUPERHEROES_CACHE = "superheroes";
+
     private final SuperheroesJpaRepository superheroesJpaRepository;
 
     @Override
@@ -23,7 +26,7 @@ public class H2DbSuperheroesRepository implements SuperheroesRepository {
     }
 
     @Override
-    @Cacheable("superheroes")
+    @Cacheable(SUPERHEROES_CACHE)
     public List<Superhero> findAll() {
         return superheroesJpaRepository.findAll();
     }
@@ -34,6 +37,7 @@ public class H2DbSuperheroesRepository implements SuperheroesRepository {
     }
 
     @Override
+    @CacheEvict(value = SUPERHEROES_CACHE, allEntries = true)
     public Superhero save(Superhero superhero) {
         return superheroesJpaRepository.save(superhero);
     }

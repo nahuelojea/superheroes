@@ -45,7 +45,7 @@ public class SuperheroesControllerTest {
                     "superheroes": [
                         {"id": 1, "name": "Superman"},
                         {"id": 2, "name": "Spiderman"},
-                        {"id": 3, "name": "Goku SSJ2"},
+                        {"id": 3, "name": "Vegeta"},
                         {"id": 4, "name": "Manolito el fuerte"},
                         {"id": 5, "name": "Super Hijitus"},
                         {"id": 6, "name": "Capitán América"},
@@ -77,16 +77,19 @@ public class SuperheroesControllerTest {
     }
 
     @Test
-    void shouldReturnGukuWhenCreateSuperhero() throws Exception {
+    void shouldReturnGokuWhenCreateSuperhero() throws Exception {
         mockMvc.perform(post(ADD_SUPERHERO_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": 12, \"name\": \"Goku\"}"))
+                        .content("{\"name\": \"Goku\"}"))
                 .andExpect(status().isCreated())
-                .andExpect(content().json("{\"id\": 12, \"name\": \"Goku\"}"));
-
-        mockMvc.perform(get(GET_SUPERHERO_URL, 12)).andExpect(status().isOk())
                 .andExpect(content().json("""
-                        {"id": 12, "name": "Goku"}
+                        {"name": "Goku"}
+                """));
+
+        mockMvc.perform(get(GET_ALL_SUPERHEROES_BY_NAME_URL, "Goku"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {"superheroes": [{"id": 12, "name": "Goku"}]}
                 """));
     }
 
@@ -95,27 +98,25 @@ public class SuperheroesControllerTest {
         val id = 3;
         mockMvc.perform(put(UPDATE_SUPERHERO_URL, id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": 3, \"name\": \"Goku SSJ2\"}"))
+                        .content("{\"name\": \"Vegeta\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\": 3, \"name\": \"Goku SSJ2\"}"));
-
-        mockMvc.perform(get(GET_SUPERHERO_URL, 3)).andExpect(status().isOk())
                 .andExpect(content().json("""
-                        {"id": 3, "name": "Goku SSJ2"}
+                        {"id": 3, "name": "Vegeta"}
+                """));
+
+        mockMvc.perform(get(GET_SUPERHERO_URL, id))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {"id": 3, "name": "Vegeta"}
                 """));
     }
 
     @Test
     void shouldReturnOkWhenDeleteSuperhero() throws Exception {
-        mockMvc.perform(post(ADD_SUPERHERO_URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": 15, \"name\": \"Vegeta\"}"))
-                .andExpect(status().isCreated())
-                .andExpect(content().json("{\"id\": 15, \"name\": \"Vegeta\"}"));
+        mockMvc.perform(delete(DELETE_SUPERHERO_URL, 13))
+                .andExpect(status().isOk());
 
-        mockMvc.perform(delete(DELETE_SUPERHERO_URL, 15))
-                .andExpect(status().isNoContent());
-
-        mockMvc.perform(get(GET_SUPERHERO_URL, 15)).andExpect(status().isNotFound());
+        mockMvc.perform(get(GET_SUPERHERO_URL, 13))
+                .andExpect(status().isNotFound());
     }
 }

@@ -1,8 +1,6 @@
 package com.w2m.superheroes.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "SUPERHEROES")
 public class Superhero {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String name;
 

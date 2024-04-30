@@ -14,7 +14,7 @@
 	<name>superheroes</name>
 	<description>Superheroes project - Nahuel Ojea</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<springfox-version>3.0.0</springfox-version>
 		<springdoc-openapi-ui-version>1.8.0</springdoc-openapi-ui-version>
@@ -22,6 +22,7 @@
 		<jackson-databind-version>0.2.6</jackson-databind-version>
 		<jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
 		<springdoc-openapi-starter-webmvc-ui-version>2.5.0</springdoc-openapi-starter-webmvc-ui-version>
+		<jacoco-maven-pligin-version>0.8.12</jacoco-maven-pligin-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,6 +75,11 @@
 			<groupId>org.openapitools</groupId>
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>${jackson-databind-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco-maven-pligin-version}</version>
 		</dependency>
 	</dependencies>
 
@@ -144,6 +150,26 @@
 							<generateModelTests>false</generateModelTests>
 							<generateApiTests>false</generateApiTests>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

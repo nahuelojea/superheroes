@@ -1,5 +1,7 @@
 package com.w2m.superheroes.infrastructure.mapper;
 
+import com.w2m.superheroes.application.mapper.SuperheroesMapper;
+import com.w2m.superheroes.application.mapper.SuperheroesMapperImpl;
 import com.w2m.superheroes.domain.Superhero;
 import com.w2m.superheroes.openapi.dto.SuperheroDTO;
 import org.junit.jupiter.api.Test;

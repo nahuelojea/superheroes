@@ -64,8 +64,8 @@ paths:
           schema:
             type: integer
       responses:
-        204:
-          description: Superhero deleted successfully
+        200:
+          $ref: '#/components/responses/delete_response'
         404:
           description: Superhero not found
         500:
@@ -143,6 +143,12 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/superhero'
+    delete_response:
+      description: Superhero deleted successfully
+      content:
+        text/plain:
+          schema:
+            type: string
 
   schemas:
     superhero:
@@ -151,6 +157,7 @@ components:
         id:
           type: integer
           description: Superhero identifier
+          readOnly: true
         name:
           type: string
           description: Superhero name
